@@ -13,18 +13,173 @@ var counting2 = 0
 var initialUndone = 0
 var initialDone = 0
 
-function add() {
+class Alert {
+    constructor (position,timeout,hasDisableClick,isStacked)
+    {   
+        this.timeout = timeout
+        this.isStacked = isStacked
+        this.positions = position.split('-')
+        this.hasDisableClick = hasDisableClick
+    }
+   
+    popSuccess(str) {
+        var div = document.createElement('div')
+        div.className = "alert-success"
+        div.id = "popUp"
+        var currentPosition ='top'
+        div.innerHTML += '<i class="fas fa-check-circle"></i>'
+        for (var i in this.positions) {
+            if (this.positions[i]==='right') {
+                div.style.left = "77%"
+            }
+            if (this.positions[i]==='left') {
+                div.style.left = "2%"
+            }
+            if (this.positions[i]==='center') {
+                div.style.left = "40%"
+            }
+            if (this.positions[i]==='bottom') {
+                div.style.top = "73vh"
+                currentPosition = 'bottom'
+            }
+        }
+        popsitionModifier.bind(this)(currentPosition);
+        if (this.hasDisableClick) {
+           div.innerHTML += '<i class="fas fa-times" id="close-button" onclick="disable(event)"></i>'
+        }
+       
+        div.innerHTML+= "<h3>"+ str +"</h3>"
+        document.getElementById('pop-up').appendChild(div)
+        setTimeout (function() {
+            div.style.animationName = "fadeOut" 
+        },this.timeout)
+        setTimeout (function() {
+            div.remove(); 
+        },this.timeout + 1000)
+    }
 
-    var check = document.getElementById('header-taskname')
-    if (check.value.trim() != '') {
+   popError(str) {
+    var div = document.createElement('div')
+    div.className = "alert-error"
+    div.id = "popUp"
+    var currentPosition ='top'
+    div.innerHTML += '<i class="fas fa-times-circle"></i>'
+    for (var i in this.positions) {
+        if (this.positions[i]==='right') {
+            div.style.left =  "77%"
+        }
+        if (this.positions[i]==='left') {
+            div.style.left = "2%"
+        }
+        if (this.positions[i]==='center') {
+            div.style.left = "40%"
+        }
+        if (this.positions[i]==='bottom') {
+            div.style.top = "73vh"
+            currentPosition = 'bottom'
+        }
+    }
+    popsitionModifier.bind(this)(currentPosition);
+    if (this.hasDisableClick) {
+       div.innerHTML += '<i class="fas fa-times" id="close-button"  onclick="disable(event)"></i>'
+    }
+    div.innerHTML += "<h3>"+ str +"</h3>"
+    document.getElementById('pop-up').appendChild(div)
+    setTimeout (function() {
+        div.style.animationName = "fadeOut" 
+    },this.timeout)
+    setTimeout (function() {
+        div.remove(); 
+    },this.timeout + 1000)
+   }
+
+   popInfo(str) {
+    var div = document.createElement('div')
+    div.className = "alert-info"
+    div.id = "popUp"
+    var currentPosition ='top'
+    div.innerHTML += '<i class="fas fa-info-circle"></i>'
+    for (var i in this.positions) {
+        if (this.positions[i]==='right') {
+            div.style.left = "77%"
+        }
+        if (this.positions[i]==='left') {
+            div.style.left = "2%"
+        }
+        if (this.positions[i]==='center') {
+            div.style.left = "40%"
+        }
+        if (this.positions[i]==='bottom') {
+            div.style.top = "73vh"
+            currentPosition = 'bottom'
+        }
+    }
+    popsitionModifier.bind(this)(currentPosition);
+    if (this.hasDisableClick) {
+       div.innerHTML += '<i class="fas fa-times" id="close-button"  onclick="disable(event)"></i>'
+    }
+    div.innerHTML += "<h3>"+ str +"</h3>"
+    document.getElementById('pop-up').appendChild(div)
+    setTimeout (function() {
+        div.style.animationName = "fadeOut" 
+    },this.timeout)
+    setTimeout (function() {
+        div.remove(); 
+    },this.timeout + 1000)
+   }
+
+   popWarning(str) {
+    var div = document.createElement('div')
+    div.className = "alert-warning"
+    div.id = "popUp"
+    var currentPosition ='top'
+    div.innerHTML += '<i class="fas fa-exclamation-circle"></i>'
+    for (var i in this.positions) {
+        if (this.positions[i]==='right') {
+            div.style.left = "77%"
+        }
+        if (this.positions[i]==='left') {
+            div.style.left = "2%"
+        }
+        if (this.positions[i]==='center') {
+            div.style.left = "40%"
+        }
+        if (this.positions[i]==='bottom') {
+            div.style.top = "73vh"
+            currentPosition = 'bottom'
+        }
+    }
+    popsitionModifier.bind(this)(currentPosition);
+    if (this.hasDisableClick) {
+       div.innerHTML += '<i class="fas fa-times" id="close-button"  onclick="disable(event)"></i>'
+    }
+    div.innerHTML += "<h3>"+ str +"</h3>"
+    document.getElementById('pop-up').appendChild(div)
+    setTimeout (function() {
+        div.style.animationName = "fadeOut" 
+    },this.timeout)
+    setTimeout (function() {
+        div.remove(); 
+    },this.timeout + 1000)
+    
+   }
+}
+
+let alert = new Alert('bottom-right',5000,true,false)
+
+function add() {
+        var check = document.getElementById('header-student-name')
+    //if (check.value.trim() != '') {
         countTask++
         countUndone++
         var taskList = document.getElementById('task-list')
-        var add = document.getElementById('header-taskname')
+        var addStudentName = document.getElementById('header-student-name')
+        var addStudentID = document.getElementById('header-student-ID')
+        var addStudentDOB = document.getElementById('header-student-DOB')
         var item = document.createElement('li')
-        item.innerHTML += '<label><input type="checkbox" onclick="disabledButton(event)"/>' + add.value.trim() + '</label>'
+        item.innerHTML += '<label><input type="checkbox" onclick="disabledButton(event)"/> STUDENT NAME : ' + addStudentName.value.trim() + " STUDENT ID : " + addStudentID.value.trim() + " STUDENT DOB : " + addStudentDOB.value.trim() + '</label>'
         item.innerHTML += '<button class="delete-button" onclick="deleteItem(event)">Delete</button>'
-        item.innerHTML += '<button class="edit-button" onclick="editTaskName(event)">Edit</button>'
+        //item.innerHTML += '<button class="edit-button" onclick="editTaskName(event)">Edit</button>'
         changeBackgroundColorTask(item)
         check.setAttribute('class','animation-input')
         alert.popSuccess("Add successfully!!")
@@ -39,7 +194,7 @@ function add() {
             }, 1000)
         },1000)
         
-    }
+    //}
 } 
 function changeBackgroundColorTask(item) {
     if (done == 1)
@@ -54,13 +209,6 @@ function changeBackgroundColor(item, count) {
         item.style.backgroundColor = '#d9d9d9'
     else
         item.style.backgroundColor = '#F1F1F1'
-}
-function validate() {
-    var checkValidate = document.getElementById('header-taskname')
-    if (checkValidate.value.trim() == '') {
-        document.getElementById('valid').style.display = 'block'
-        alert.popWarning("Please input somthing")
-    }
 }
 
 function deleteAttention() {
@@ -579,158 +727,6 @@ video.addEventListener('volumechange',function(e){
     }
 }, false)
 
-class Alert {
-    constructor (position,timeout,hasDisableClick,isStacked)
-    {   
-        this.timeout = timeout
-        this.isStacked = isStacked
-        this.positions = position.split('-')
-        this.hasDisableClick = hasDisableClick
-    }
-   
-    popSuccess(str) {
-        var div = document.createElement('div')
-        div.className = "alert-success"
-        div.id = "popUp"
-        var currentPosition ='top'
-        div.innerHTML += '<i class="fas fa-check-circle"></i>'
-        for (var i in this.positions) {
-            if (this.positions[i]==='right') {
-                div.style.left = "77%"
-            }
-            if (this.positions[i]==='left') {
-                div.style.left = "2%"
-            }
-            if (this.positions[i]==='center') {
-                div.style.left = "40%"
-            }
-            if (this.positions[i]==='bottom') {
-                div.style.top = "73vh"
-                currentPosition = 'bottom'
-            }
-        }
-        popsitionModifier.bind(this)(currentPosition);
-        if (this.hasDisableClick) {
-           div.innerHTML += '<i class="fas fa-times" id="close-button" onclick="disable(event)"></i>'
-        }
-       
-        div.innerHTML+= "<h3>"+ str +"</h3>"
-        document.getElementById('pop-up').appendChild(div)
-        setTimeout (function() {
-            div.style.animationName = "fadeOut" 
-        },this.timeout)
-        setTimeout (function() {
-            div.remove(); 
-        },this.timeout + 1000)
-    }
-
-   popError(str) {
-    var div = document.createElement('div')
-    div.className = "alert-error"
-    div.id = "popUp"
-    var currentPosition ='top'
-    div.innerHTML += '<i class="fas fa-times-circle"></i>'
-    for (var i in this.positions) {
-        if (this.positions[i]==='right') {
-            div.style.left =  "77%"
-        }
-        if (this.positions[i]==='left') {
-            div.style.left = "2%"
-        }
-        if (this.positions[i]==='center') {
-            div.style.left = "40%"
-        }
-        if (this.positions[i]==='bottom') {
-            div.style.top = "73vh"
-            currentPosition = 'bottom'
-        }
-    }
-    popsitionModifier.bind(this)(currentPosition);
-    if (this.hasDisableClick) {
-       div.innerHTML += '<i class="fas fa-times" id="close-button"  onclick="disable(event)"></i>'
-    }
-    div.innerHTML += "<h3>"+ str +"</h3>"
-    document.getElementById('pop-up').appendChild(div)
-    setTimeout (function() {
-        div.style.animationName = "fadeOut" 
-    },this.timeout)
-    setTimeout (function() {
-        div.remove(); 
-    },this.timeout + 1000)
-   }
-
-   popInfo(str) {
-    var div = document.createElement('div')
-    div.className = "alert-info"
-    div.id = "popUp"
-    var currentPosition ='top'
-    div.innerHTML += '<i class="fas fa-info-circle"></i>'
-    for (var i in this.positions) {
-        if (this.positions[i]==='right') {
-            div.style.left = "77%"
-        }
-        if (this.positions[i]==='left') {
-            div.style.left = "2%"
-        }
-        if (this.positions[i]==='center') {
-            div.style.left = "40%"
-        }
-        if (this.positions[i]==='bottom') {
-            div.style.top = "73vh"
-            currentPosition = 'bottom'
-        }
-    }
-    popsitionModifier.bind(this)(currentPosition);
-    if (this.hasDisableClick) {
-       div.innerHTML += '<i class="fas fa-times" id="close-button"  onclick="disable(event)"></i>'
-    }
-    div.innerHTML += "<h3>"+ str +"</h3>"
-    document.getElementById('pop-up').appendChild(div)
-    setTimeout (function() {
-        div.style.animationName = "fadeOut" 
-    },this.timeout)
-    setTimeout (function() {
-        div.remove(); 
-    },this.timeout + 1000)
-   }
-
-   popWarning(str) {
-    var div = document.createElement('div')
-    div.className = "alert-warning"
-    div.id = "popUp"
-    var currentPosition ='top'
-    div.innerHTML += '<i class="fas fa-exclamation-circle"></i>'
-    for (var i in this.positions) {
-        if (this.positions[i]==='right') {
-            div.style.left = "77%"
-        }
-        if (this.positions[i]==='left') {
-            div.style.left = "2%"
-        }
-        if (this.positions[i]==='center') {
-            div.style.left = "40%"
-        }
-        if (this.positions[i]==='bottom') {
-            div.style.top = "73vh"
-            currentPosition = 'bottom'
-        }
-    }
-    popsitionModifier.bind(this)(currentPosition);
-    if (this.hasDisableClick) {
-       div.innerHTML += '<i class="fas fa-times" id="close-button"  onclick="disable(event)"></i>'
-    }
-    div.innerHTML += "<h3>"+ str +"</h3>"
-    document.getElementById('pop-up').appendChild(div)
-    setTimeout (function() {
-        div.style.animationName = "fadeOut" 
-    },this.timeout)
-    setTimeout (function() {
-        div.remove(); 
-    },this.timeout + 1000)
-    
-   }
-}
-
 function popsitionModifier(position) {
 var pops = document.querySelectorAll("#popUp")
   if(position === 'top') {
@@ -767,5 +763,3 @@ function disable(event) {
    var ChosenPop = event.currentTarget.parentElement
    ChosenPop.remove();
 }
-
-let alert = new Alert('bottom-right',5000,true,false)

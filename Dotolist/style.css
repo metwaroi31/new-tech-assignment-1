@@ -15,16 +15,23 @@ body {
     margin: 0;
     overflow: hidden;
 }
-#header-taskname {
-    width: 80%;
+#header-student-name {
+    width: 40%;
     border: 1px solid #4b4c4f;
     opacity: 1;
 }
-#header-taskname-edit {
-    width: 80%;
+
+#header-student-ID {
+    width: 25%;
     border: 1px solid #4b4c4f;
     opacity: 1;
 }
+#header-student-DOB {
+    width: 20%;
+    border: 1px solid #4b4c4f;
+    opacity: 1;
+}
+
 #to-do-list {
     display: block;
     margin: auto;
